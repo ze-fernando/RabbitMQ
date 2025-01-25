@@ -1,0 +1,23 @@
+services: 
+  rabbitmq:
+    image: rabbitmq:management
+    container_name: rabbitmq
+    ports:
+    - "5672:5672"
+    - "15672:15672"
+
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    container_name: sqlserver
+    volumes: 
+      - /data/volumes
+    ports: 
+      - "1433:1433"
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=admin
+      - MSSQL_PID=Developer
+
+networks:
+  defult:
+    driver: bridge
