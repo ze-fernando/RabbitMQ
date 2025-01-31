@@ -1,20 +1,23 @@
 using MassTransit;
 
-namespace API.Infra
+namespace RabbitMQ.API.Infra;
+internal static class AppExtensions
 {
-    internal static class AppExtensions
+    public static void AddRabbitMQ(this IServiceCollection services)
     {
-        public static void AddRabbitMQ(this IServiceCollection services)
+        services.AddMassTransit(busConfigurator =>
         {
-            services.AddMassTransit(busConfigurator =>
+            busConfigurator.UsingRabbitMq((context, config) =>
             {
-                busConfigurator.UsingRabbitMq((context, config) =>
+                config.Host(new Uri(RabbitMqConfig.Host), host =>
                 {
-                    config.Host(Configuration.RabbitMQHost);
+                    host.Username("guest");
+                    host.Password("guest");
                 });
-
+                config.ConfigureEndpoints(context);
             });
 
-        }
+        });
+
     }
 }

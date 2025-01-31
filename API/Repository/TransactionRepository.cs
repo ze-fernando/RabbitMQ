@@ -1,10 +1,8 @@
-using API.Models;
 using Microsoft.EntityFrameworkCore;
+using RabbitMQ.API.Models;
 
-namespace API.Repository
+namespace RabbitMQ.API.Repository;
+public class TransactionRepository : DbContext
 {
-    public class TransactionRepository : DbContext
-    {
-        public required DbSet<Transaction> Transactions {get; set;}
-    }
+    public required DbSet<Transaction> Transactions {get; set;}
 }
