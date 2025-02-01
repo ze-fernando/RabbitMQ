@@ -3,7 +3,7 @@ using RabbitMQ.API.Models;
 using RabbitMQ.API.Repository;
 
 namespace RabbitMQ.API.Services;
-public class TransactionService(IBus bus, TransactionRepository repository)
+public class PublisherService(IBus bus, TransactionRepository repository)
 {
    private readonly IBus _bus = bus;
    private readonly TransactionRepository _repository = repository;
