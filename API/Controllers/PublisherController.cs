@@ -3,11 +3,13 @@ using RabbitMQ.API.Models;
 using RabbitMQ.API.Services;
 
 namespace RabbitMQ.API.Controllers;
-public class PublisherController(TransactionService service) : ControllerBase
+[ApiController]
+[Route("/api")]
+public class PublisherController(PublisherService service) : ControllerBase
 {
-   private readonly TransactionService _service = service; 
+   private readonly PublisherService _service = service; 
 
-   [HttpPost]
+   [HttpPost("send-transaction")]
    public async Task<IActionResult> PublishTransactionAsync([FromBody] Transaction transaction)
    {
       var result = await _service.CreateTransaction(transaction);

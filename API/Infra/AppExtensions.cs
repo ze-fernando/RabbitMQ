@@ -1,4 +1,5 @@
 using MassTransit;
+using RabbitMQ.API.Services;
 
 namespace RabbitMQ.API.Infra;
 internal static class AppExtensions
@@ -7,6 +8,8 @@ internal static class AppExtensions
     {
         services.AddMassTransit(busConfigurator =>
         {
+            busConfigurator.AddConsumer<ConsumerService>();
+
             busConfigurator.UsingRabbitMq((context, config) =>
             {
                 config.Host(new Uri(RabbitMqConfig.Host), host =>
