@@ -10,14 +10,15 @@ builder.Services.AddControllers();
 builder.Services.AddRabbitMQ();
 
 builder.Services.AddScoped<PublisherService>();
-builder.Services.AddScoped<ConsumerService>();
+//builder.Services.AddScoped<ConsumerService>();
+builder.Services.AddScoped<TransactionService>();
 
 var conf = new RabbitMqConfig();
 builder.Configuration.GetSection("RabbitMqConfig").Bind(conf);
 
-builder.Services.AddDbContext<TransactionRepository>( options =>
+builder.Services.AddDbContext<AppDbContext>( options =>
     options.UseSqlServer(
-        builder.Configuration.GetConnectionString("Connection")
+        builder.Configuration.GetConnectionString("DbConnection")
     )
 );
 var app = builder.Build();
