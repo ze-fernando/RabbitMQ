@@ -4,17 +4,17 @@ using RabbitMQ.API.Repository;
 namespace RabbitMQ.API.Services;
 public class ConsumerService : IConsumer<Transaction>
 {
-    private readonly TransactionRepository _repository;
+    private readonly AppDbContext _context;
     private readonly ILogger<Transaction> _logger;
-    public ConsumerService(TransactionRepository repository, ILogger<Transaction> logger)
+    public ConsumerService(AppDbContext context, ILogger<Transaction> logger)
     {
-        _repository = repository;
+        _context = context;
         _logger = logger;
     }
     public async Task Consume(ConsumeContext<Transaction> context)
     {
         var message = context.Message;
-        var transaction = _repository.Transactions
+        var transaction = _context.Transactions
         .FirstOrDefault(x => x.Id == message.Id);
 
         if(transaction != null)
