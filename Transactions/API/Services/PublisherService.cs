@@ -18,7 +18,8 @@ public class PublisherService(IBus bus, AppDbContext repository)
       };
 
       _repository.Transactions.Add(_transaction);
-
+      await _repository.SaveChangesAsync();
+      
       await _bus.Publish(_transaction);
 
       return _transaction;

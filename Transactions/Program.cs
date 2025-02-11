@@ -10,7 +10,7 @@ builder.Services.AddControllers();
 builder.Services.AddRabbitMQ();
 
 builder.Services.AddScoped<PublisherService>();
-//builder.Services.AddScoped<ConsumerService>();
+builder.Services.AddScoped<ConsumerService>();
 builder.Services.AddScoped<TransactionService>();
 
 var conf = new RabbitMqConfig();

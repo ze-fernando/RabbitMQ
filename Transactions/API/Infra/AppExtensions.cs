@@ -19,8 +19,9 @@ internal static class AppExtensions
                 });
                 config.ConfigureEndpoints(context);
             });
-
         });
+
+        services.AddMassTransitHostedService();
 
     }
 }

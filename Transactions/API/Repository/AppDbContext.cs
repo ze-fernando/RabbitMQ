@@ -7,4 +7,4 @@ public class AppDbContext : DbContext
     public required DbSet<Transaction> Transactions {get; set;}
 
     public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) {}
-}
+    }
