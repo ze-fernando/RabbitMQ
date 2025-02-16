@@ -29,5 +29,17 @@ builder.Services.AddSwaggerGen(sg =>
 
 var app = builder.Build();
 
+
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI(sg =>
+    {
+        sg.SwaggerEndpoint("/swagger/v1/swagger.json", "API V1");
+        sg.RoutePrefix = "";
+    });
+}
+
+
 app.MapControllers();
 app.Run();
