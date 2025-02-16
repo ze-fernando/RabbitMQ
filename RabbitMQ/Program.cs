@@ -21,6 +21,12 @@ builder.Services.AddDbContext<AppDbContext>( options =>
         builder.Configuration.GetConnectionString("DbConnection")
     )
 );
+
+builder.Services.AddSwaggerGen(sg =>
+{
+    sg.SwaggerDoc("v1", new OpenApiInfo { Title = "RabbitMQ Example", Version = "v1" });
+});
+
 var app = builder.Build();
 
 app.MapControllers();
